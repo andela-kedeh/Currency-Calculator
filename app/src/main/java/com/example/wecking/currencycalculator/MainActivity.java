@@ -1,47 +1,53 @@
 package com.example.wecking.currencycalculator;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import android.widget.Toast;
 
 import org.json.JSONObject;
-
-import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText showEntry, showEntry2;
     private EditText showResult;
     private Double num;
-    private int i,num2,numtemp;
     private static String entry = "", entry2 = "";
     private Spinner currenciesResult, operator;
     private String[] listCurrenciesResult, getListCurrenciesEntry, getListCurrenciesEntry2, listOperator;
     private Spinner currenciesEntry;
     private static String currencyEntry, currencyResult, operate, currencyEntry2;
     private Button Ans, equal, clear;
+    private JSONObject ratesObject;
+    private ProgressDialog mProgressDialog;
 
     private static final String API_URL = "https://openexchangerates.org/api/latest.json?app_id=bfc41d831a3040ffa50dd31bd0b72da2";//PUT YOUR API KEY HERE
     private  Double rate;
+    private Double firstRate;
+    private Double secondRate;
+    private Double resultRate;
 
     private Spinner currenciesEntry2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new ExchangeRate(this).get();
         setContentView(R.layout.activity_main);
         initialize();
     }
-
+    public void setRates(JSONObject ratesObject) {
+        this.ratesObject = ratesObject;
+    }
     private void initialize() {
         currenciesEntry = (Spinner) findViewById(R.id.currencies_entry);
         getListCurrenciesEntry = getResources().getStringArray(R.array.currencies_entry);
@@ -108,12 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 useAnswer();
                 break;
             case R.id.equal:
-                currencyEntry2 = currenciesEntry2.getSelectedItem().toString();
-                currencyEntry = currenciesEntry.getSelectedItem().toString();
-                currencyResult = currenciesResult.getSelectedItem().toString();
-                entry = showEntry.getText().toString();
-                entry2 = showEntry2.getText().toString();
-                get(currencyEntry, currencyEntry2, currencyResult);
+                getValues();
+                calculate();
                 break;
         }
     }
@@ -122,30 +124,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        String useValue = showResult.getText().toString();
         showEntry.setText(useValue);
         showResult.setText("");
-
-        currenciesResult.getSelectedItem();
+        //currenciesEntry.setTag(currenciesResult.getSelectedItem());
     }
 
-    public void calculate(Double firstRate, Double secondRate, Double resultRate) {
-        operate = operator.getSelectedItem().toString();
-        System.out.println(secondRate + "king2");
-        Double rate1 = resultRate / firstRate;
-        System.out.println(firstRate + "king1");
-        Double rate2 = resultRate / secondRate;
-        if(operate.equals("Add")) {
-            num = (rate1 * Double.valueOf(entry)) + (rate2 * Double.valueOf(entry2));
-        }
-        else if(operate.equals("Minus")) {
-            num = (rate1 * Double.valueOf(entry)) - (rate2 * Double.valueOf(entry2));
-        }
-        else if(operate.equals("Divide")) {
-            num = (rate1 * Double.valueOf(entry)) / (rate2 * Double.valueOf(entry2));
-        }
-        else if(operate.equals("Multiply")) {
-            num = (rate1 * Double.valueOf(entry)) * (rate2 * Double.valueOf(entry2));
-        }
-        showResult.setText(String.valueOf(num));
+    private void calculate() {
+        if(checkFiled()) {
+            operate = operator.getSelectedItem().toString();
+            Double leftOperand = (resultRate / firstRate) * Double.valueOf(entry);
+            Double rightOperand = (resultRate / secondRate) * Double.valueOf(entry2);
+            switch (operate) {
+                case "Add":
+                    num = leftOperand + rightOperand;
+                    break;
+                case "Minus":
+                    ;
+                    num = leftOperand - rightOperand;
+                    break;
+                case "Divide":
+                    num = leftOperand / rightOperand;
+                    break;
+                case "Multiply":
+                    num = leftOperand * rightOperand;
+                    break;
+                default:
+                    Toast.makeText(this, "You must select an operator", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            Toast.makeText(this, "Calculations Successful", Toast.LENGTH_SHORT).show();
+            showResult.setText(String.valueOf(num));
+        }else
+            return;
     }
+
+    private boolean checkFiled() {
+        String text = "null";
+        boolean state = true;
+        if(showEntry.getText().toString().equals(""))
+            text = "Please enter currency value for first entry";
+        if(showEntry2.getText().toString().equals(""))
+            text = "Please enter currency value for second entry";
+        if(currenciesResult.getSelectedItem().toString().equals("Currency"))
+            text = "Please select currency for result";
+        if(currenciesEntry.getSelectedItem().toString().equals("Currency"))
+            text = "Please select currency for first entry";
+        if(currenciesEntry2.getSelectedItem().toString().equals("Currency"))
+            text = "Please select currency for second entry";
+        if(!text.equals("null")) {
+            Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+            toast.show();
+            state = false;
+        }
+        return state;
+    }
+
 
     private void reset() {
         num = 0.0;
@@ -154,37 +185,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showEntry2.setText("");
     }
 
+    private void getValues(){
+        currencyEntry2 = currenciesEntry2.getSelectedItem().toString();
+        currencyEntry = currenciesEntry.getSelectedItem().toString();
+        currencyResult = currenciesResult.getSelectedItem().toString();
+        entry = showEntry.getText().toString();
+        entry2 = showEntry2.getText().toString();
+        try {
+            firstRate = ratesObject.getDouble(currencyEntry);
+            secondRate = ratesObject.getDouble(currencyEntry2);
+            resultRate = ratesObject.getDouble(currencyResult);
+        }catch(NullPointerException np){
 
+        }catch(Exception e){
 
-    public Double get(final String currency, final String currency2, final String currency3) {
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(API_URL, new AsyncHttpResponseHandler() {
+        }
+    }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    String response = new String(responseBody, "UTF-8");
-                    JSONObject jsonObj = new JSONObject(response);
-                    JSONObject ratesObject = jsonObj
-                            .getJSONObject("rates");
-
-                    Double firstRate = ratesObject.getDouble(currency);
-                    Double secondRate = ratesObject.getDouble(currency2);
-                    Double thirdRate = ratesObject.getDouble(currency3);
-                    calculate(firstRate, secondRate, thirdRate);
-                    System.out.println(firstRate);
-
-                } catch (Exception e) {
-
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-
-        return rate;
+    public void endApplication(){
+        finish();
     }
 }
