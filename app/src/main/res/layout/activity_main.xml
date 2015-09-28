@@ -2,60 +2,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#fff">
-
-    <LinearLayout android:id="@+id/linearLayoutH1"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:orientation="vertical"
-        android:layout_weight=".50"
-        android:weightSum="1" >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:orientation="vertical"
-            android:weightSum="1.0" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Choose Currency for Result"
-            android:weightSum="1.0"/>
-
-            </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/inputText1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:weightSum="1.0" >
-
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".70"
-                android:id="@+id/currencies_result">
-            </Spinner>
-
-            <EditText
-                android:id="@+id/result_id"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".30"
-                android:editable="false"/>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    android:background="#fff"
+    android:padding="26dp">
 
 
     <LinearLayout
@@ -75,11 +23,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:text="Choose Currency for Entry"
                 android:weightSum="1.0"/>
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/inputText3"
@@ -90,19 +39,23 @@
             android:weightSum="1.0" >
 
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".70"
-                android:id="@+id/currencies_entry2">
-            </Spinner>
-
             <EditText
-                android:id="@+id/entry2"
+                android:id="@+id/entry"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".30"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:hint="Enter first value"
+                android:textSize="16dp"/>
+
+            <Spinner
+                style="@style/Material.Widget.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".70"
+                android:id="@+id/currencies_entry">
+            </Spinner>
+
 
 
         </LinearLayout>
@@ -122,15 +75,15 @@
             android:layout_height="wrap_content"
             android:layout_weight=".25"
             android:orientation="horizontal"
-            android:weightSum="1.0"
-            android:gravity="center">
+            android:weightSum="1.0">
 
             <Spinner
                 android:id="@+id/operator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".20"
-                android:gravity="center"/>
+                android:layout_weight=".20">
+
+            </Spinner>
 
         </LinearLayout>
 
@@ -143,19 +96,78 @@
             android:weightSum="1.0" >
 
 
+            <EditText
+                android:id="@+id/entry2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".30"
+                android:inputType="numberDecimal"
+                android:hint="Enter second value"
+                android:textSize="16dp"/>
+
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".70"
-                android:id="@+id/currencies_entry">
+                android:id="@+id/currencies_entry2">
             </Spinner>
 
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/linearLayoutH1"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:orientation="vertical"
+        android:layout_weight=".50"
+        android:weightSum="1"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:orientation="vertical"
+            android:weightSum="1.0" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Choose Currency for Result"
+                android:weightSum="1.0"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inputText1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="1.0" >
+
+
             <EditText
-                android:id="@+id/entry"
+                android:id="@+id/result_id"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".30"
-                android:inputType="numberDecimal"/>
+                android:editable="false"
+                android:hint="Result Filed"
+                android:textSize="16dp"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".70"
+                android:id="@+id/currencies_result">
+            </Spinner>
+
 
 
         </LinearLayout>
@@ -173,39 +185,47 @@
 
         <Button
             android:id="@+id/Btnclear_id"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:background="#dfd"
-            android:text="CLR"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="CLEAR"
             android:layout_weight=".20"
-            android:textSize="25sp"
-            android:layout_margin="15dp"
+            android:textSize="15sp"
+            android:background="#2196F3"
+            android:textColor="#fff"
+            android:padding="8dp"
             />
 
         <Button
             android:id="@+id/buttonAns"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:background="#dfd"
-            android:text="Ans"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Use Ans"
             android:layout_weight=".20"
-            android:textSize="25sp"
-            android:layout_margin="15dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="15sp"
+            android:background="#2196F3"
+            android:textColor="#fff"
+            android:padding="8dp"
             />
 
 
         <Button
             android:id="@+id/equal"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:background="#dfd"
-            android:text="="
+            android:minWidth="64dp"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Calculate"
             android:layout_weight=".20"
-            android:textSize="25sp"
-            android:layout_margin="15dp"
+            android:textSize="15sp"
+            android:background="#2196F3"
+            android:textColor="#fff"
+            android:padding="8dp"
             />
 
         </LinearLayout>
+
+
 
 </LinearLayout>
 
