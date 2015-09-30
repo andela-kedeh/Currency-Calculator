@@ -32,7 +32,6 @@
         <item>USD</item>
     </string-array>
     <string-array name="currencies_entry2">
-        <item>Currency</item>
         <item>KWD</item>
         <item>BHD</item>
         <item>OMR</item>
@@ -52,4 +51,18 @@
         <item>Add</item>
     </string-array>
     <string name="title_activity_no_internet">NoInternet</string>
+    <string name="title_activity_converter">Converted List</string>
+
+    <string-array name="country_name">
+        <item>"Kuwaiti Dinar"</item>
+        <item>"Bahrain Dinar"</item>
+        <item>"Omani Rial"</item>
+        <item>"Latvian Lats"</item>
+        <item>"Uk Pound Sterling"</item>
+        <item>"Jordanian Dinar"</item>
+        <item>"European Euro"</item>
+        <item>"Azerbaijani Manat"</item>
+        <item>"Cayman Islands Dollar"</item>
+        <item>"United State Dollar"</item>
+    </string-array>
 </resources>

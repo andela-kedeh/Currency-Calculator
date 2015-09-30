@@ -41,18 +41,19 @@
 
             <EditText
                 android:id="@+id/entry"
-                android:layout_width="fill_parent"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".30"
+                android:layout_weight=".50"
+                android:layout_marginTop="3dp"
                 android:inputType="numberDecimal"
                 android:hint="Enter first value"
                 android:textSize="16dp"/>
 
             <Spinner
-                style="@style/Material.Widget.Spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".70"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_weight=".50"
+                android:drawSelectorOnTop="true"
                 android:id="@+id/currencies_entry">
             </Spinner>
 
@@ -77,13 +78,64 @@
             android:orientation="horizontal"
             android:weightSum="1.0">
 
-            <Spinner
+            <RadioGroup
                 android:id="@+id/operator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".20">
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true" >
 
-            </Spinner>
+            <RadioButton
+                android:id="@+id/radio0"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:text="/" />
+
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:text="*" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_background"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:text="+" />
+
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_background"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:text="-" />
+
+            </RadioGroup>
+
 
         </LinearLayout>
 
@@ -98,17 +150,18 @@
 
             <EditText
                 android:id="@+id/entry2"
-                android:layout_width="fill_parent"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".30"
+                android:layout_weight=".50"
                 android:inputType="numberDecimal"
                 android:hint="Enter second value"
+                android:layout_marginTop="3dp"
                 android:textSize="16dp"/>
 
             <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".70"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_weight=".50"
                 android:id="@+id/currencies_entry2">
             </Spinner>
 
@@ -154,18 +207,20 @@
 
             <EditText
                 android:id="@+id/result_id"
-                android:layout_width="fill_parent"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".30"
+                android:layout_weight=".50"
                 android:editable="false"
                 android:hint="Result Filed"
+                android:layout_marginTop="3dp"
                 android:textSize="16dp"/>
 
             <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".70"
-                android:id="@+id/currencies_result">
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_weight=".50"
+                android:id="@+id/currencies_result"
+                >
             </Spinner>
 
 
@@ -185,47 +240,69 @@
 
         <Button
             android:id="@+id/Btnclear_id"
-            android:layout_width="wrap_content"
+            android:layout_width="46dp"
             android:layout_height="36dp"
-            android:text="CLEAR"
-            android:layout_weight=".20"
-            android:textSize="15sp"
-            android:background="#2196F3"
+            android:text="   Clear  "
+            android:layout_weight=".50"
+            android:textSize="15dp"
+            android:background="#333333"
             android:textColor="#fff"
-            android:padding="8dp"
+            android:layout_margin="15dp"
+            android:padding="4dp"
             />
 
         <Button
             android:id="@+id/buttonAns"
-            android:layout_width="wrap_content"
+            android:layout_width="46dp"
             android:layout_height="36dp"
-            android:text="Use Ans"
-            android:layout_weight=".20"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="15sp"
+            android:text="Use Answer"
+            android:layout_weight=".50"
+            android:layout_margin="15dp"
+            android:textSize="15dp"
             android:background="#2196F3"
             android:textColor="#fff"
-            android:padding="8dp"
-            />
-
-
-        <Button
-            android:id="@+id/equal"
-            android:minWidth="64dp"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Calculate"
-            android:layout_weight=".20"
-            android:textSize="15sp"
-            android:background="#2196F3"
-            android:textColor="#fff"
-            android:padding="8dp"
+            android:padding="4dp"
             />
 
         </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearButton"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight=".25"
+        android:orientation="horizontal"
+        android:weightSum="1.0" >
 
+        <Button
+            android:id="@+id/equal"
+            android:minWidth="64dp"
+            android:layout_width="46dp"
+            android:layout_height="36dp"
+            android:text="Calculate "
+            android:layout_weight=".50"
+            android:textSize="15dp"
+            android:background="#2196F3"
+            android:textColor="#fff"
+            android:layout_margin="15dp"
+            android:padding="4dp"
+            />
+
+        <Button
+            android:id="@+id/converter"
+            android:minWidth="64dp"
+            android:layout_width="46dp"
+            android:layout_height="36dp"
+            android:text="Converter"
+            android:layout_margin="15dp"
+            android:layout_weight=".50"
+            android:textSize="15dp"
+            android:background="#2196F3"
+            android:textColor="#fff"
+            android:padding="4dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
 
