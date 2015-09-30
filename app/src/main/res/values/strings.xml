@@ -52,6 +52,13 @@
     </string-array>
     <string name="title_activity_no_internet">NoInternet</string>
     <string name="title_activity_converter">Converted List</string>
+    <string name="calculations_successful_string">Calculations Successful</string>
+    <string name="first_entry_error_message">Please enter currency value for first entry</string>
+    <string name="second_entry_error_message">Please enter currency value for second entry</string>
+    <string name="null_string">null</string>
+    <string name="result_string">result</string>
+    <string name="dialog_string">Okay</string>
+    <string name="result">result</string>
 
     <string-array name="country_name">
         <item>"Kuwaiti Dinar"</item>

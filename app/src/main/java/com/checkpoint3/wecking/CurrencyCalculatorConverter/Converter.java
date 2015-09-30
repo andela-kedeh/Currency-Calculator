@@ -21,7 +21,7 @@ public class Converter extends ListActivity {
         super.onCreate(savedInstanceState);
         currencies = getResources().getStringArray(R.array.currencies_entry);
         calculatorValues = new ArrayList<>();
-        result = getIntent().getExtras().getDouble("result");
+        result = getIntent().getExtras().getDouble(getString(R.string.result));
         calculatorValues = new CalculatorProcessor().convert(currencies, result);
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);

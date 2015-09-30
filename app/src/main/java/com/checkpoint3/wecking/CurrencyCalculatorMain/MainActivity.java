@@ -116,7 +116,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.converter:
                 Intent converter = new Intent(this, Converter.class);
-                converter.putExtra("result", val);
+                converter.putExtra(getString(R.string.result_string), val);
                 startActivity(converter);
                 break;
         }
@@ -131,7 +131,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private void calculate() {
         if(checkFilled()) {
             num = mProcessResult.calculate(operand, firstRate, secondRate, resultRate, entry, entry2);
-            Toast.makeText(this, "Calculations Successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.calculations_successful_string, Toast.LENGTH_SHORT).show();
             showResult.setText(String.valueOf(num));
             val = num;
             num = 0.0;
@@ -140,19 +140,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     private boolean checkFilled() {
-        String text = "null";
+        String text = getString(R.string.null_string);
         boolean state = true;
         if(showEntry.getText().toString().equals(""))
-            text = "Please enter currency value for first entry";
+            text = getString(R.string.first_entry_error_message);
         if(showEntry2.getText().toString().equals(""))
-            text = "Please enter currency value for second entry";
-        if(currenciesResult.getSelectedItem().toString().equals("Currency"))
-            text = "Please select currency for result";
-        if(currenciesEntry.getSelectedItem().toString().equals("Currency"))
-            text = "Please select currency for first entry";
-        if(currenciesEntry2.getSelectedItem().toString().equals("Currency"))
-            text = "Please select currency for second entry";
-        if(!text.equals("null")) {
+            text = getString(R.string.second_entry_error_message);
+        if(!text.equals(getString(R.string.null_string))) {
             Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
             toast.show();
             state = false;
@@ -257,7 +251,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         final LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.activity_no_internet, null);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(view);
-        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.dialog_string, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 MainActivity.this.onPause();
