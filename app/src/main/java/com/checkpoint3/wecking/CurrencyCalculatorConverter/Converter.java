@@ -29,9 +29,6 @@ public class Converter extends ListActivity {
         setListAdapter(new ConverterListAdapter(this, getResources().getStringArray(R.array.currencies_entry2), calculatorValues));
     }
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_converter, menu);
@@ -41,7 +38,6 @@ public class Converter extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; goto parent activity.
                 this.finish();
                 return true;
             default:

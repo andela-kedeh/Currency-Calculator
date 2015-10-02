@@ -162,7 +162,41 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     private void getValues(){
+        itemSelectedAction();
+        currencyEntry2 = currenciesEntry2.getSelectedItem().toString();
+        currencyEntry = currenciesEntry.getSelectedItem().toString();
+        currencyResult = currenciesResult.getSelectedItem().toString();
+        entry = showEntry.getText().toString();
+        entry2 = showEntry2.getText().toString();
+        switch (operator.getCheckedRadioButtonId()) {
+            case 2131624043:
+                operand = "+";
+                break;
+            case 2131624044:
+                operand = "-";
+                break;
+            case 2131624041:
+                operand = "/";
+                break;
+            case 2131624042:
+                operand = "*";
+                break;
+            //return null;
+        }
+        System.out.println(operand);
+        setExchangeRate();
+        try {
+            firstRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position1]);
+            secondRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position2]);
+            resultRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position3]);
+        }catch(NullPointerException np){
 
+        }catch(Exception e){
+
+        }
+    }
+
+    private void itemSelectedAction() {
         currenciesEntry2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -198,39 +232,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             }
         });
-
-        currencyEntry2 = currenciesEntry2.getSelectedItem().toString();
-        currencyEntry = currenciesEntry.getSelectedItem().toString();
-        currencyResult = currenciesResult.getSelectedItem().toString();
-        entry = showEntry.getText().toString();
-        entry2 = showEntry2.getText().toString();
-        switch (operator.getCheckedRadioButtonId()) {
-            case 2131624043:
-                operand = "+";
-                break;
-            case 2131624044:
-                operand = "-";
-                break;
-            case 2131624041:
-                operand = "/";
-                break;
-            case 2131624042:
-                operand = "*";
-                break;
-            //return null;
-        }
-        System.out.println(operand);
-        setExchangeRate();
-        try {
-            System.out.println(ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position1]));
-            firstRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position1]);
-            secondRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position2]);
-            resultRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position3]);
-        }catch(NullPointerException np){
-
-        }catch(Exception e){
-
-        }
     }
 
     @Override
@@ -258,6 +259,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 dialog.cancel();
             }
         });
+
         builder.show();
     }
 
