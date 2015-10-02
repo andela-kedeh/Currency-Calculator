@@ -21,8 +21,6 @@ import com.checkpoint3.wecking.CurrencyCalculator.Exchange.ExchangeRate;
 import com.checkpoint3.wecking.CurrencyCalculatorProcessor.CalculatorProcessor;
 import com.example.wecking.currencycalculator.R;
 
-import org.json.JSONObject;
-
 public class MainActivity extends Activity implements View.OnClickListener{
     private EditText showEntry, showEntry2;
     private EditText showResult;
@@ -110,7 +108,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 useAnswer();
                 break;
             case R.id.equal:
-                getValues();
                 calculate();
                 break;
             case R.id.converter:
@@ -128,6 +125,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     private void calculate() {
+        itemSelectedAction();
+        getValues();
         if(checkFilled()) {
             num = mProcessResult.calculate(operand, firstRate, secondRate, resultRate, entry, entry2);
             Toast.makeText(this, R.string.calculations_successful_string, Toast.LENGTH_SHORT).show();
@@ -161,7 +160,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     private void getValues(){
-        itemSelectedAction();
         currencyEntry2 = currenciesEntry2.getSelectedItem().toString();
         currencyEntry = currenciesEntry.getSelectedItem().toString();
         currencyResult = currenciesResult.getSelectedItem().toString();
@@ -182,11 +180,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
             //return null;
         }
-        System.out.println(operand);
         checkExchangeRate();
         try {
-            System.out.println(getCurrency(position1) + "kingmdmdmdm");
-            System.out.println(ratesObject.getExchangeRate(getCurrency(position1)) + "ffddddfdfgdfdf");
             firstRate = ratesObject.getExchangeRate(getCurrency(position1));
             secondRate = ratesObject.getExchangeRate(getCurrency(position2));
             resultRate = ratesObject.getExchangeRate(getCurrency(position3));

@@ -28,7 +28,6 @@ public class ExchangeRate extends AsyncHttpClient{
                     JSONObject rateObject = jsonObj
                             .getJSONObject("rates");
                     ExchangeRate.exchangeRate = rateObject;
-                    Log.v("TAG", "Rates have been set");
                 } catch (Exception e) {
 
                 }

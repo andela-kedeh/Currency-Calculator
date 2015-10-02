@@ -3,8 +3,6 @@ package com.checkpoint3.wecking.CurrencyCalculatorProcessor;
 
 import com.checkpoint3.wecking.CurrencyCalculator.Exchange.ExchangeRate;
 
-import org.json.JSONException;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
