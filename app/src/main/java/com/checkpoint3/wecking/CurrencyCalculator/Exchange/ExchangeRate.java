@@ -5,6 +5,7 @@ import android.util.Log;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -40,7 +41,18 @@ public class ExchangeRate extends AsyncHttpClient{
 
     }
 
-    public JSONObject getExchangeRate(){
+    public static Double getExchangeRate(String currency){
+        Double rate = 0.0;
+        try {
+            rate = exchangeRate.getDouble(currency);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return rate;
+    }
+
+    public JSONObject getRateObject(){
         return exchangeRate;
     }
 }

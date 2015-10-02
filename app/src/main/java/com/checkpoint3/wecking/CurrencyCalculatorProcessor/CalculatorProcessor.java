@@ -2,7 +2,6 @@ package com.checkpoint3.wecking.CurrencyCalculatorProcessor;
 
 
 import com.checkpoint3.wecking.CurrencyCalculator.Exchange.ExchangeRate;
-import com.checkpoint3.wecking.CurrencyCalculator.Exchange.Rate;
 
 import org.json.JSONException;
 
@@ -45,13 +44,9 @@ public class CalculatorProcessor {
         int count = currencies.length;
         value = new ArrayList<>();
         for(int i = 0; i < count; i++){
-            try{
-                Double result1 = result * new Rate().getRate().getDouble(currencies[i]);
-                System.out.println(result);
-                value.add(String.valueOf(result1));
-            }catch(JSONException je){
-                je.printStackTrace();
-            }
+            Double result1 = result * new ExchangeRate().getExchangeRate(currencies[i]);
+            System.out.println(result);
+            value.add(String.valueOf(result1));
         }
 
         return value;

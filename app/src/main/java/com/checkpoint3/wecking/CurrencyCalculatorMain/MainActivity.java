@@ -16,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.checkpoint3.wecking.CurrencyCalculator.Exchange.Rate;
 import com.checkpoint3.wecking.CurrencyCalculatorConverter.Converter;
 import com.checkpoint3.wecking.CurrencyCalculator.Exchange.ExchangeRate;
 import com.checkpoint3.wecking.CurrencyCalculatorProcessor.CalculatorProcessor;
@@ -33,7 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private Spinner currenciesEntry, currenciesEntry2, currenciesResult;
     private static String currencyEntry, currencyResult, operate, currencyEntry2;
     private Button Ans, equal, clear, converter;
-    private JSONObject ratesObject;
+    private ExchangeRate ratesObject;
     private Double val;
     private RadioGroup operator;
 
@@ -184,11 +183,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
             //return null;
         }
         System.out.println(operand);
-        setExchangeRate();
+        checkExchangeRate();
         try {
-            firstRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position1]);
-            secondRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position2]);
-            resultRate = ratesObject.getDouble(getResources().getStringArray(R.array.currencies_entry2)[position3]);
+            System.out.println(getCurrency(position1) + "kingmdmdmdm");
+            System.out.println(ratesObject.getExchangeRate(getCurrency(position1)) + "ffddddfdfgdfdf");
+            firstRate = ratesObject.getExchangeRate(getCurrency(position1));
+            secondRate = ratesObject.getExchangeRate(getCurrency(position2));
+            resultRate = ratesObject.getExchangeRate(getCurrency(position3));
         }catch(NullPointerException np){
 
         }catch(Exception e){
@@ -240,12 +241,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //finish();
     }
 
-    public void setExchangeRate(){
-        JSONObject rate = new Rate().getRate();
-        if(rate == null)
+    public void checkExchangeRate(){
+        if(new ExchangeRate().getRateObject() == null)
             internetError();
-        else
-            ratesObject = rate;
+    }
+
+    private String getCurrency(int position){
+        return getResources().getStringArray(R.array.currencies_entry2)[position];
     }
 
     private void internetError() {
