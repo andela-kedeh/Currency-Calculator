@@ -125,7 +125,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     private void calculate() {
-        itemSelectedAction();
+        itemSelectedSpinnerPosition();
         getValues();
         if(checkFilled()) {
             num = mProcessResult.calculate(operand, firstRate, secondRate, resultRate, entry, entry2);
@@ -192,11 +192,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    private void itemSelectedAction() {
+    private void itemSelectedSpinnerPosition() {
         currenciesEntry2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.this.position2 = position;
+                position2 = position;
             }
 
             @Override
@@ -208,7 +208,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         currenciesEntry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.this.position1 = position;
+                position1 = position;
             }
 
             @Override
@@ -220,7 +220,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         currenciesResult.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.this.position3 = position;
+                position3 = position;
             }
 
             @Override
