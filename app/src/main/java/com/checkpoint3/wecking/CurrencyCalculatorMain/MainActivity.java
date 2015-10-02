@@ -252,7 +252,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         builder.setPositiveButton(R.string.dialog_string, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                MainActivity.this.onPause();
+                onPause();
                 dialog.cancel();
             }
         });
